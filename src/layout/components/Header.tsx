@@ -18,9 +18,9 @@ const Header = () => {
     setDarkMode(!darkMode);
   };
   return (
-    <header className="relative dark:bg-[#000000]">
-      <nav className="container h-20 flex items-center gap-[152px]">
-        <div className="flex justify-between items-center w-[65%] dark:text-[#C61F1F]">
+    <header className="dark:bg-[#000000] dark:transition-all transition-all">
+      <nav className="container h-20 flex items-center gap-[130px]">
+        <div className="flex justify-between items-center w-[65%] dark:text-[#A1A1A1] dark:transition-all transition-all">
           <div>
             <NavLink to={"/"}>
               <img src={logo} alt="" />
@@ -30,8 +30,15 @@ const Header = () => {
           <ul className="flex max-[1100px]:hidden">
             <li className="px-4.5">
               <NavLink
+                end={true}
                 to={"/"}
-                className={"flex flex-col justify-center items-center gap-2"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "text-[#C61F1F]"
+                      : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
+                  } transition-all flex flex-col justify-center items-center gap-2`
+                }
               >
                 <Film />
                 <span>Home</span>
@@ -40,7 +47,13 @@ const Header = () => {
             <li className="px-4.5">
               <NavLink
                 to={"/movie"}
-                className={"flex flex-col justify-center items-center gap-2"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "text-[#C61F1F]"
+                      : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
+                  } transition-all flex flex-col justify-center items-center gap-2`
+                }
               >
                 <Clapperboard />
                 <span>Movie</span>
@@ -48,8 +61,14 @@ const Header = () => {
             </li>
             <li className="px-4.5">
               <NavLink
-                to={"/"}
-                className={"flex flex-col justify-center items-center gap-2"}
+                to={"/sac"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "text-[#C61F1F]"
+                      : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
+                  } transition-all flex flex-col justify-center items-center gap-2`
+                }
               >
                 <Search />
                 <span>Search</span>
@@ -58,8 +77,14 @@ const Header = () => {
 
             <li className="px-4.5">
               <NavLink
-                to={"/"}
-                className={"flex flex-col justify-center items-center gap-2"}
+                to={"/sc"}
+                className={({ isActive }) =>
+                  `${
+                    isActive
+                      ? "text-[#C61F1F]"
+                      : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
+                  } transition-all flex flex-col justify-center items-center gap-2`
+                }
               >
                 <Heart />
                 <span>Favorite</span>
@@ -68,9 +93,9 @@ const Header = () => {
           </ul>
         </div>
 
-        <div className="flex items-center max-[1100px]:hidden">
+        <div className="flex items-center gap-3 max-[1100px]:hidden">
           <div className="relative inline-block px-4 py-2">
-            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none dark:text-[#C61F1F]">
+            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none dark:text-[#C61F1F] dark:transition-all transition-all">
               <option value="eng" selected>
                 eng
               </option>
@@ -87,16 +112,18 @@ const Header = () => {
               Login
             </button>
           </div>
+
+          <div className="cursor-pointer select-none" onClick={handleMode}>
+            {darkMode ? (
+              <Moon className="text-[#C61F1F] hover:opacity-80" />
+            ) : (
+              <Sun className="text-[#111111] hover:opacity-80" />
+            )}
+          </div>
         </div>
 
-        <Menu className="min-[1100px]:hidden min-[1100px]: ml-auto" />
+        <Menu className="min-[1100px]:hidden ml-auto" />
       </nav>
-      <div
-        className="absolute top-7 right-72 cursor-pointer select-none"
-        onClick={handleMode}
-      >
-        {!darkMode ? <Moon className="text-[#C61F1F]"/> : <Sun className="text-[#111111]" />}
-      </div>
     </header>
   );
 };

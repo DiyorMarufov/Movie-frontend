@@ -3,13 +3,12 @@ import hero from "../../shared/assets/hero/hero.png";
 import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
 import MovieView from "../../shared/components/movie-view/MovieView";
-import { useMovie } from "../movie/services/useMovie";
+import { useFullMovieData } from "../../shared/hooks";
 
 const Home = () => {
-  const { getMovies } = useMovie();
-  const { data } = getMovies();
+  const { data } = useFullMovieData();
   return (
-    <section className="dark:bg-[#000000]">
+    <section className="dark:bg-[#000000] dark:transition-all transition-all">
       <div className="container-hero relative">
         <div>
           <img src={hero} className="w-full object-cover" alt="" />
@@ -45,13 +44,13 @@ const Home = () => {
         <div className="px-2.5">
           <img src={hero} width={108} alt="" />
         </div>
-        <button className="border p-[13px] rounded-[50%]  bg-[#1D1D1D]">
+        <button className="border p-[13px] rounded-[50%] bg-[#1D1D1D]">
           <ArrowRight className="text-[red] w-5 h-5" />
         </button>
       </div>
 
-      <TopWeeks/>
-      <MovieView data={data?.results}/>
+      <TopWeeks />
+      <MovieView data={data} />
     </section>
   );
 };

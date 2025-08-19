@@ -20,3 +20,8 @@
 .container-hero {
   max-width: 1392px;
 }
+
+.images::-webkit-scrollbar,
+.actors::-webkit-scrollbar {
+  display: none;
+}

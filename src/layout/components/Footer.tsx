@@ -19,9 +19,9 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="pt-[118px] dark:bg-[#000000]">
+    <footer className="pt-[118px] dark:bg-[#000000] dark:transition-all transition-all">
       <div className="container">
-        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1 dark:bg-[#111111] dark:text-[#C61F1F]">
+        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1 dark:bg-[#111111] dark:text-[#C61F1F] dark:transition-all transition-all">
           <div className="flex flex-col gap-[48px]">
             <div>
               <img src={footerLogo} alt="" />
@@ -82,31 +82,41 @@ const Footer = () => {
 
           <ul className="flex flex-col gap-[18px]">
             <div>
-              <h1 className="dark:text-[#ffffff]">Categories</h1>
+              <h1 className="dark:text-[#ffffff] dark:transition-all transition-all">
+                Categories
+              </h1>
             </div>
             <div className="flex flex-col gap-[16px]">
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Play />
-                  <span className="dark:text-[#A1A1A1]">Movies</span>
+                  <span className="dark:text-[#A1A1A1] dark:transition-all transition-all">
+                    Movies
+                  </span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Clapperboard />
-                  <span className="dark:text-[#A1A1A1]">Theater</span>
+                  <span className="dark:text-[#A1A1A1] dark:transition-all transition-all">
+                    Theater
+                  </span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Smile />
-                  <span className="dark:text-[#A1A1A1]">Concerts</span>
+                  <span className="dark:text-[#A1A1A1] dark:transition-all transition-all">
+                    Concerts
+                  </span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Globe />
-                  <span className="dark:text-[#A1A1A1]">Sports</span>
+                  <span className="dark:text-[#A1A1A1] dark:transition-all transition-all">
+                    Sports
+                  </span>
                 </Link>
               </li>
             </div>
@@ -114,11 +124,15 @@ const Footer = () => {
 
           <div className="flex flex-col gap-[40px]">
             <div className="flex flex-col gap-3">
-              <h1 className="text-[16px] dark:text-[#ffffff]">Contact Us</h1>
+              <h1 className="text-[16px] dark:text-[#ffffff] dark:transition-all transition-all">
+                Contact Us
+              </h1>
               <p className="text-[20px]">+998 (95) 897-33-38</p>
             </div>
             <div className="flex flex-col gap-3">
-              <h1 className="dark:text-[#ffffff]">Social Media</h1>
+              <h1 className="dark:text-[#ffffff] dark:transition-all transition-all">
+                Social Media
+              </h1>
               <div className="flex gap-5">
                 <Instagram />
                 <Facebook />

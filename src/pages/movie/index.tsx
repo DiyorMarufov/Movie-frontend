@@ -1,14 +1,13 @@
 import { memo } from "react";
-import { useMovie } from "./services/useMovie";
 import MovieView from "../../shared/components/movie-view/MovieView";
+import { useFullMovieData } from "../../shared/hooks";
 
 const Movie = () => {
-  const { getMovies } = useMovie();
-  const { data } = getMovies();
+  const { data } = useFullMovieData();
 
   return (
     <div className="Index">
-      <MovieView data={data?.results} />
+      <MovieView data={data} />
     </div>
   );
 };
