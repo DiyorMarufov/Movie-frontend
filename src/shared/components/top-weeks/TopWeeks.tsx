@@ -6,8 +6,14 @@ const TopWeeks = () => {
   return (
     <div className="container mt-[50px] mb-[20px]">
       <div className="flex justify-between">
-        <Title text="На неделе" />
-        <ShowAll text="Показать все" />
+        <Title
+          text="На неделе"
+          className="dark:text-[var(--color-py)] dark:transition-all transition-all"
+        />
+        <ShowAll
+          text="Показать все"
+          className="dark:text-[var(--color-py)] dark:transition-all transition-all"
+        />
       </div>
     </div>
   );

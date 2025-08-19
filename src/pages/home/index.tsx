@@ -3,7 +3,7 @@ import hero from "../../shared/assets/hero/hero.png";
 import { ArrowLeft, ArrowRight, Play } from "lucide-react";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
 import MovieView from "../../shared/components/movie-view/MovieView";
-import { useFullMovieData } from "../../shared/hooks";
+import { useFullMovieData } from "../../shared/hooks/getGenres";
 
 const Home = () => {
   const { data } = useFullMovieData();
@@ -31,7 +31,7 @@ const Home = () => {
             <span>6+</span>
           </div>
 
-          <button className="flex items-center justify-center gap-[7px] w-full h-[50px] bg-[#ffffff] rounded-[12px] text-[#C61F1F]">
+          <button className="flex items-center justify-center gap-[7px] w-full h-[50px] bg-[#ffffff] rounded-[12px] text-[var(--color-py)]">
             <Play />
             <span>Watch</span>
           </button>

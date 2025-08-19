@@ -2,9 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --color-laylo: red;
-  --color-bg-py: blue;
+:root {
+  --color-py: #C61F1F;
 }
 
 .container,

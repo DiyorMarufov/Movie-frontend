@@ -5,12 +5,15 @@ import defaultImg from "../../../shared/assets/hero/default-img.jpg";
 
 interface Props {
   data: any;
+  className?: string;
 }
 
-const MovieView: FC<Props> = ({ data }) => {
+const MovieView: FC<Props> = ({ data, className }) => {
   const navigate = useNavigate();
   return (
-    <section className="dark:bg-[#000000]">
+    <div
+      className={`dark:bg-[#000000] dark:transition-all transition-all ${className}`}
+    >
       <div className="container">
         <div className="grid grid-cols-4 gap-5 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
           {data?.map((movie: any) => (
@@ -29,13 +32,13 @@ const MovieView: FC<Props> = ({ data }) => {
               </div>
               <div className="pt-[12px]">
                 <h3
-                  className="font-medium text-[23px] line-clamp-1 dark:text-[#ffffff]"
+                  className="font-medium text-[23px] line-clamp-1 dark:text-[#ffffff] dark:transition-all transition-all"
                   title={movie.title}
                 >
                   {movie.title}
                 </h3>
                 <p>
-                  <span className="dark:text-[#4D4D4D]">
+                  <span className="dark:text-[#4D4D4D] dark:transition-all transition-all">
                     {movie?.genres.join(", ")}
                   </span>
                 </p>
@@ -44,7 +47,7 @@ const MovieView: FC<Props> = ({ data }) => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

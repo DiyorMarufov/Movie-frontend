@@ -9,7 +9,7 @@ interface Props {
 const ShowAll: FC<Props> = ({ text, className }) => {
   return (
     <button
-      className={`flex items-center gap-1 text-[#C61F1F] cursor-pointer hover:opacity-80 ${className}`}
+      className={`flex items-center gap-1 cursor-pointer hover:opacity-80 ${className}`}
     >
       <span>{text}</span>
       <ArrowRight className="w-4 h-4" />

@@ -2,12 +2,12 @@ import { memo } from "react";
 import { useParams } from "react-router-dom";
 import { useMovieDetail } from "./services/useMovieDetail";
 import { IMAGE_URL } from "../../shared/const";
-import { Star } from "lucide-react";
 import Title from "../../shared/components/ui/title";
 import userLogo from "../../shared/assets/hero/user-icon.png";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
 import MovieView from "../../shared/components/movie-view/MovieView";
-import { useFullMovieData } from "../../shared/hooks";
+import { useFullMovieData } from "../../shared/hooks/getGenres";
+import { Image } from "antd";
 
 const MovieDetail = () => {
   const { id } = useParams();
@@ -36,60 +36,73 @@ const MovieDetail = () => {
               <img src={`${IMAGE_URL}${data?.backdrop_path}`} alt="" />
             </div>
           </div>
-          <div className="w-[50%] bg-white rounded-lg shadow-lg px-6 pt-2 max-[1200px]:w-full max-[1200px]:pb-3 dark:bg-[#111111] dark:transition-all transition-all">
-            <h2 className="text-2xl font-semibold mb-4 text-center border-b pb-2 dark:text-[#A1A1A1] dark:transition-all transition-all">
-              About Movie
-            </h2>
+          <div className="w-[50%] bg-[#F5F5F5] rounded-lg shadow-lg px-6 pt-2 max-[1200px]:w-full max-[1200px]:pb-3">
+            <div className="text-[#333] p-4 rounded-md space-y-3.5">
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Name
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {data?.title}
+                </div>
+              </div>
 
-            <div className="space-y-3 text-gray-700 dark:text-[#A1A1A1]">
-              <p>
-                <span className="font-semibold">Title:</span> {data?.title}
-              </p>
-              <p>
-                <span className="font-semibold">Release Date:</span>{" "}
-                {data?.release_date}
-              </p>
-              <p>
-                <span className="font-semibold">Rating:</span>
-                <span className="inline-flex ml-2 text-yellow-500">
-                  <Star className="w-5 h-5 fill-current mr-1" />{" "}
-                  {data?.vote_average.toFixed(1)} / 10
-                </span>
-                <span className="ml-2 text-sm text-gray-500 dark:text-[#A1A1A1]">
-                  ({data?.vote_count} votes)
-                </span>
-              </p>
-              <p>
-                <span className="font-semibold">Runtime:</span> {data?.runtime}{" "}
-                minutes
-              </p>
-              <p>
-                <span className="font-semibold">Genres:</span>{" "}
-                {data?.genres?.map((g: any) => g.name).join(", ")}
-              </p>
-              <p>
-                <span className="font-semibold">Original Language:</span>{" "}
-                {data?.original_language.toUpperCase()}
-              </p>
-              <div className="flex justify-between max-[500px]:flex-col max-[550px]:gap-2">
-                <p>
-                  <span className="font-semibold">Adult Content:</span>{" "}
-                  {data?.adult ? "Yes" : "No"}
-                </p>
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Genre
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {data?.genres?.map((g: any) => g.name).join(" / ")}
+                </div>
+              </div>
 
-                {data?.homepage && (
-                  <p>
-                    <span className="font-semibold">Homepage:</span>{" "}
-                    <a
-                      href={data.homepage}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      Visit Official Site
-                    </a>
-                  </p>
-                )}
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Country
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {data?.production_countries?.[0]?.name || "Noma'lum"}
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Release year
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {data?.release_date?.slice(0, 4)}
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Language
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {data?.original_language === "uz"
+                    ? "O'zbekcha"
+                    : data?.original_language?.toUpperCase()}
+                </div>
+              </div>
+
+              <div className="flex">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Duration
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  {Math.floor(data?.runtime / 60)}hour {data?.runtime % 60}min
+                </div>
+              </div>
+
+              <div className="flex items-center">
+                <div className="w-1/3 bg-[#E0E0E0] text-[#666] px-2 py-1 font-semibold text-sm">
+                  Age limit
+                </div>
+                <div className="w-2/3 bg-[#FAFAFA] text-[#333] px-3 py-1 text-sm">
+                  <span className="bg-red-600 px-2 py-1 rounded text-white font-bold text-xs">
+                    {data?.adult ? "18+" : "16+"}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -102,7 +115,7 @@ const MovieDetail = () => {
         <div className="flex gap-[20px] overflow-x-auto mt-10 h-[220px] images">
           {imagesData?.backdrops?.slice(0, 20).map((item: any, inx: number) => (
             <div key={inx} className="flex-shrink-0">
-              <img
+              <Image
                 src={IMAGE_URL + item.file_path}
                 alt=""
                 className="h-full object-cover rounded"
@@ -130,7 +143,9 @@ const MovieDetail = () => {
                     }
                     width={100}
                     height={150}
-                    className="h-[150px] w-[100px] object-cover rounded-full mx-auto"
+                    className={`h-[150px] w-[100px] object-cover rounded-full mx-auto ${
+                      !user.profile_path ? "fill-black bg-[white]" : ""
+                    }`}
                     alt={user.name}
                     loading="lazy"
                   />
