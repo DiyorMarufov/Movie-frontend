@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const handleMode = () => {
     document.documentElement.classList.toggle("dark");
     setDarkMode(!darkMode);
@@ -115,9 +115,9 @@ const Header = () => {
 
           <div className="cursor-pointer select-none" onClick={handleMode}>
             {darkMode ? (
-              <Moon className="text-[#C61F1F] hover:opacity-80" />
+              <Moon className="text-[#111111] hover:opacity-80" />
             ) : (
-              <Sun className="text-[#111111] hover:opacity-80" />
+              <Sun className="text-[#C61F1F] hover:opacity-80" />
             )}
           </div>
         </div>
