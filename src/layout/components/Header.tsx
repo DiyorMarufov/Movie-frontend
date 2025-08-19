@@ -1,13 +1,26 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../shared/assets/header/logo.svg";
-import { Clapperboard, Film, Heart, Search, Menu } from "lucide-react";
+import {
+  Clapperboard,
+  Film,
+  Heart,
+  Search,
+  Menu,
+  Sun,
+  Moon,
+} from "lucide-react";
 
 const Header = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const handleMode = () => {
+    document.documentElement.classList.toggle("dark");
+    setDarkMode(!darkMode);
+  };
   return (
-    <header>
+    <header className="relative dark:bg-[#000000]">
       <nav className="container h-20 flex items-center gap-[152px]">
-        <div className="flex justify-between items-center w-[65%]">
+        <div className="flex justify-between items-center w-[65%] dark:text-[#C61F1F]">
           <div>
             <NavLink to={"/"}>
               <img src={logo} alt="" />
@@ -57,7 +70,7 @@ const Header = () => {
 
         <div className="flex items-center max-[1100px]:hidden">
           <div className="relative inline-block px-4 py-2">
-            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none">
+            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none dark:text-[#C61F1F]">
               <option value="eng" selected>
                 eng
               </option>
@@ -75,10 +88,15 @@ const Header = () => {
             </button>
           </div>
         </div>
-        
-          <Menu className="min-[1100px]:hidden min-[1100px]: ml-auto"/>
-        
+
+        <Menu className="min-[1100px]:hidden min-[1100px]: ml-auto" />
       </nav>
+      <div
+        className="absolute top-7 right-72 cursor-pointer select-none"
+        onClick={handleMode}
+      >
+        {darkMode ? <Moon /> : <Sun className="text-[#C61F1F]" />}
+      </div>
     </header>
   );
 };

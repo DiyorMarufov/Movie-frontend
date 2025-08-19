@@ -28,12 +28,12 @@ const MovieView: FC<Props> = ({ data }) => {
             </div>
             <div className="pt-[12px]">
               <h3
-                className="font-medium text-[23px] line-clamp-1"
+                className="font-medium text-[23px] line-clamp-1 dark:text-[#ffffff]"
                 title={movie.title}
               >
                 {movie.title}
               </h3>
-              <p>⭐ {movie.vote_average}</p>
+              <p>⭐ <span className="dark:text-[#3A3A3A]">{movie.vote_average}</span></p>
             </div>
           </div>
         ))}

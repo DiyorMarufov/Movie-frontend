@@ -9,7 +9,7 @@ const Home = () => {
   const { getMovies } = useMovie();
   const { data } = getMovies();
   return (
-    <section>
+    <section className="dark:bg-[#000000]">
       <div className="container-hero relative">
         <div>
           <img src={hero} className="w-full object-cover" alt="" />

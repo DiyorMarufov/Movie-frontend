@@ -19,9 +19,9 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="mt-[118px]">
+    <footer className="pt-[118px] dark:bg-[#000000]">
       <div className="container">
-        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1">
+        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1 dark:bg-[#111111] dark:text-[#C61F1F]">
           <div className="flex flex-col gap-[48px]">
             <div>
               <img src={footerLogo} alt="" />
@@ -31,7 +31,7 @@ const Footer = () => {
                 <div>
                   <img src={playMarket} width={30} alt="" />
                 </div>
-                <div>
+                <div className="dark:text-[#ffffff]">
                   <p className="text-[13px] uppercase">Download from</p>
                   <p className="text-[18px]">Google Play</p>
                 </div>
@@ -40,7 +40,7 @@ const Footer = () => {
                 <div>
                   <img src={apple} width={30} alt="" />
                 </div>
-                <div>
+                <div className="dark:text-[#ffffff]">
                   <p className="text-[13px] uppercase">Get it on</p>
                   <p className="text-[18px]">App Store</p>
                 </div>
@@ -50,31 +50,31 @@ const Footer = () => {
 
           <ul className="flex flex-col gap-[18px]">
             <div>
-              <h1>About Us</h1>
+              <h1 className="dark:text-[#ffffff]">About Us</h1>
             </div>
             <div className="flex flex-col gap-[16px]">
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Menu />
-                  <span>Public Offer</span>
+                  <span className="dark:text-[#A1A1A1]">Public Offer</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Sparkle />
-                  <span>Advertising</span>
+                  <span className="dark:text-[#A1A1A1]">Advertising</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <HelpCircle />
-                  <span>F.A.Q</span>
+                  <span className="dark:text-[#A1A1A1]">F.A.Q</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Phone />
-                  <span>Contacts</span>
+                  <span className="dark:text-[#A1A1A1]">Contacts</span>
                 </Link>
               </li>
             </div>
@@ -82,31 +82,31 @@ const Footer = () => {
 
           <ul className="flex flex-col gap-[18px]">
             <div>
-              <h1>Categories</h1>
+              <h1 className="dark:text-[#ffffff]">Categories</h1>
             </div>
             <div className="flex flex-col gap-[16px]">
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Play />
-                  <span>Movies</span>
+                  <span className="dark:text-[#A1A1A1]">Movies</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Clapperboard />
-                  <span>Theater</span>
+                  <span className="dark:text-[#A1A1A1]">Theater</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Smile />
-                  <span>Concerts</span>
+                  <span className="dark:text-[#A1A1A1]">Concerts</span>
                 </Link>
               </li>
               <li>
                 <Link to={""} className="flex items-center gap-2">
                   <Globe />
-                  <span>Sports</span>
+                  <span className="dark:text-[#A1A1A1]">Sports</span>
                 </Link>
               </li>
             </div>
@@ -114,11 +114,11 @@ const Footer = () => {
 
           <div className="flex flex-col gap-[40px]">
             <div className="flex flex-col gap-3">
-              <h1 className="text-[16px]">Contact Us</h1>
+              <h1 className="text-[16px] dark:text-[#ffffff]">Contact Us</h1>
               <p className="text-[20px]">+998 (95) 897-33-38</p>
             </div>
             <div className="flex flex-col gap-3">
-              <h1>Social Media</h1>
+              <h1 className="dark:text-[#ffffff]">Social Media</h1>
               <div className="flex gap-5">
                 <Instagram />
                 <Facebook />
