@@ -5,9 +5,15 @@ import MovieView from "../../shared/components/movie-view/MovieView";
 import { useFullMovieData } from "../../shared/hooks/getGenres";
 import { IMAGE_URL } from "../../shared/const";
 
+//@ts-ignore
 import "swiper/css";
+
+//@ts-ignore
 import "swiper/css/navigation";
+
+//@ts-ignore
 import "swiper/css/pagination";
+
 
 import {
   Navigation,

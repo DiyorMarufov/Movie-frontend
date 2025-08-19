@@ -171,7 +171,7 @@ const MovieDetail = () => {
         </div>
 
         <TopWeeks />
-        <MovieView data={movieViews} />
+        <MovieView data={movieViews} isLoading={isLoading} />
       </div>
     </section>
   );
