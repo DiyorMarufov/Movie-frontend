@@ -6,7 +6,7 @@ interface Props {
 
 const Skeleton: FC<Props> = ({ count = 20 }) => {
   return (
-    <div className="container grid grid-cols-4 gap-5 max-xl:grid-cols-4 max-lg:grid-cols-3 max-md:grid-cols-2">
+    <div className="container grid grid-cols-4 gap-5 max-[1000px]:grid-cols-3 max-[850px]:grid-cols-2 max-[520px]:grid-cols-1">
       {Array(count)
         .fill(" ")
         ?.map((_, index) => (
