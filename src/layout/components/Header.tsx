@@ -95,7 +95,7 @@ const Header = () => {
         className="absolute top-7 right-72 cursor-pointer select-none"
         onClick={handleMode}
       >
-        {darkMode ? <Moon /> : <Sun className="text-[#C61F1F]" />}
+        {darkMode ? <Moon className="text-[#C61F1F]"/> : <Sun className="text-[#111111]" />}
       </div>
     </header>
   );
