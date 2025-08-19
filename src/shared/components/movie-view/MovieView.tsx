@@ -30,7 +30,7 @@ const MovieView: FC<Props> = ({ data, className, isLoading }) => {
                       : defaultImg
                   }
                   alt={movie.title}
-                  className="h-[450px] w-full max-sm:w-full"
+                  className="h-[450px] w-full"
                 />
               </div>
               <div className="pt-[12px]">

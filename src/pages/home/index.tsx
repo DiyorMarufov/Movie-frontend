@@ -56,7 +56,7 @@ const Home = () => {
               <div className="relative">
                 <img
                   src={IMAGE_URL + item.backdrop_path}
-                  className="w-full h-[650px] object-cover"
+                  className="w-full h-[640px] object-cover"
                   alt={item.title}
                 />
                 <div className="absolute bottom-[24px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[10px] w-[380px] max-[850px]:hidden">

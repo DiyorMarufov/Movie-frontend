@@ -4,6 +4,8 @@ import { api } from "../api";
 interface IParams {
   page?: string;
   with_genres?: string;
+  "release_date.gte"?:string
+  "release_date.lte"?:string
 }
 
 export const getGenres = () =>
