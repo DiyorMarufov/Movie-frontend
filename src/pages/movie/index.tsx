@@ -14,7 +14,7 @@ const Movie = () => {
 
   const { getMovies } = useMovie();
   const { data: totalMovies } = getMovies();
-  const { data } = useFullMovieData({ page, with_genres });
+  const { data, isLoading } = useFullMovieData({ page, with_genres });
 
   useEffect(() => {
     getGenres().then((res) => setMovieGenres(res));
@@ -37,31 +37,34 @@ const Movie = () => {
 
   return (
     <>
-      <div className="container">
-        <h1 className="font-bold text-[16px] text-[#A1A1A1] pb-1 select-none ">
-          Filter by genre
-        </h1>
-        <Select
-          onChange={handleChange}
-          placeholder="Select genre"
-          style={{ width: 120 }}
-          options={genres}
-        />
-      </div>
-      <MovieView data={data} className="pt-5" />;
-      <div className="flex justify-center">
-        <Pagination
-          current={Number(page)}
-          total={
-            totalMovies?.total_results > 10000
-              ? 10000
-              : totalMovies?.total_results
-          }
-          showSizeChanger={false}
-          defaultPageSize={20}
-          onChange={onChange}
-        />
-      </div>
+      <section className="dark:bg-[#000000] dark:transition-all transition-all">
+        <div className="container">
+          <h1 className="font-bold text-[16px] text-[#A1A1A1] pb-1 select-none">
+            Filter by genre
+          </h1>
+          <Select
+            onChange={handleChange}
+            placeholder="Select genre"
+            style={{ width: 120 }}
+            className="select-dark"
+            options={genres}
+          />
+        </div>
+        <MovieView data={data} className="pt-5" isLoading={isLoading} />;
+        <div className="flex justify-center">
+          <Pagination
+            current={Number(page)}
+            total={
+              totalMovies?.total_results > 10000
+                ? 10000
+                : totalMovies?.total_results
+            }
+            showSizeChanger={false}
+            defaultPageSize={20}
+            onChange={onChange}
+          />
+        </div>
+      </section>
     </>
   );
 };

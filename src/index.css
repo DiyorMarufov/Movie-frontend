@@ -3,7 +3,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --color-py: #C61F1F;
+  --color-py: #c61f1f;
 }
 
 .container,
@@ -23,4 +23,30 @@
 .images::-webkit-scrollbar,
 .actors::-webkit-scrollbar {
   display: none;
+}
+
+.hero::-webkit-scrollbar {
+  display: none;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #444;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

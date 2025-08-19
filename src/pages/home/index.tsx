@@ -1,58 +1,92 @@
 import { memo } from "react";
-import hero from "../../shared/assets/hero/hero.png";
-import { ArrowLeft, ArrowRight, Play } from "lucide-react";
+import { Play } from "lucide-react";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
 import MovieView from "../../shared/components/movie-view/MovieView";
 import { useFullMovieData } from "../../shared/hooks/getGenres";
+import { IMAGE_URL } from "../../shared/const";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
+import {
+  Navigation,
+  Pagination,
+  Mousewheel,
+  Keyboard,
+  Autoplay,
+} from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "../../index.css";
+import SkeletonHero from "../../shared/components/ui/SkeletonHero";
+
+export interface IPosterMovie {
+  id: number | string;
+  backdrop_path: string;
+  title: string;
+  release_date: string;
+  genres: string[];
+  original_language: string;
+  adult: boolean;
+}
 
 const Home = () => {
-  const { data } = useFullMovieData();
+  const { data,isLoading } = useFullMovieData();
   return (
     <section className="dark:bg-[#000000] dark:transition-all transition-all">
-      <div className="container-hero relative">
-        <div>
-          <img src={hero} className="w-full object-cover" alt="" />
-        </div>
-
-        <div className="absolute bottom-[24px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[8px] w-[380px]">
-          <h1 className="font-medium text-[32px] text-[#FFFFFF] text-center">
-            Kung Fu Panda 4
-          </h1>
-
-          <div className="flex items-center gap-2 text-[#ffffff]">
-            <span>2024</span>
-            <div className="h-[4px] w-[4px] bg-[white] rounded-[100px]"></div>
-            <span>Комедия</span>
-            <div className="h-[4px] w-[4px] bg-[white] rounded-[100px]"></div>
-            <span>1ч 34м</span>
-            <div className="h-[4px] w-[4px] bg-[white] rounded-[100px]"></div>
-            <span>EN</span>
-            <div className="h-[4px] w-[4px] bg-[white] rounded-[100px]"></div>
-            <span>6+</span>
-          </div>
-
-          <button className="flex items-center justify-center gap-[7px] w-full h-[50px] bg-[#ffffff] rounded-[12px] text-[var(--color-py)]">
-            <Play />
-            <span>Watch</span>
-          </button>
-        </div>
-      </div>
-      <div className="flex justify-center mt-1">
-        <button className="border p-[13px] rounded-[50%] bg-[#1D1D1D]">
-          <ArrowLeft className="text-[red] w-5 h-5" />
-        </button>
-        <div className="px-2.5">
-          <img src={hero} width={108} alt="" />
-        </div>
-        <button className="border p-[13px] rounded-[50%] bg-[#1D1D1D]">
-          <ArrowRight className="text-[red] w-5 h-5" />
-        </button>
+      <div className="container-hero relative hero">
+        <Swiper
+          navigation={true}
+          mousewheel={true}
+          keyboard={true}
+          autoplay={{ delay: 3000, disableOnInteraction: false }}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
+          className="mySwiper cursor-pointer rounded-[12px]"
+        >
+          {isLoading && <SkeletonHero/>}
+          {data?.map((item: IPosterMovie) => (
+            <SwiperSlide key={item.id}>
+              <div className="relative">
+                <img
+                  src={IMAGE_URL + item.backdrop_path}
+                  className="w-full h-[650px] object-cover"
+                  alt={item.title}
+                />
+                <div className="absolute bottom-[24px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[10px] w-[380px] max-[850px]:hidden">
+                  <h1 className="font-medium text-[32px] text-[#FFFFFF] text-center">
+                    {item.title}
+                  </h1>
+                  <div className="flex items-center gap-2 text-[#ffffff]">
+                    <span title={item.release_date} className="line-clamp-1">
+                      {item.release_date}
+                    </span>
+                    <div className="h-[4px] w-[4px] bg-[white] rounded-full"></div>
+                    <span
+                      title={item.genres.join(", ")}
+                      className="line-clamp-1"
+                    >
+                      {item.genres.join(", ")}
+                    </span>
+                    <div className="h-[4px] w-[4px] bg-[white] rounded-full uppercase"></div>
+                    <span>{item.original_language}</span>
+                    <div className="h-[4px] w-[4px] bg-[white] rounded-full"></div>
+                    <span>{item.adult ? "18+" : "16+"}</span>
+                  </div>
+                  <button className="flex items-center justify-center gap-[7px] w-full h-[50px] bg-[#ffffff] rounded-[12px] text-[var(--color-py)]">
+                    <Play />
+                    <span>Watch</span>
+                  </button>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
 
       <TopWeeks />
-      <MovieView data={data} />
+      <MovieView data={data} isLoading={isLoading} />
     </section>
   );
 };
-
 export default memo(Home);

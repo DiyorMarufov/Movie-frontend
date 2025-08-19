@@ -2,20 +2,23 @@ import { memo, type FC } from "react";
 import { IMAGE_URL } from "../../const";
 import { useNavigate } from "react-router-dom";
 import defaultImg from "../../../shared/assets/hero/default-img.jpg";
+import Skeleton from "../ui/Skeleton";
 
 interface Props {
   data: any;
   className?: string;
+  isLoading: boolean;
 }
 
-const MovieView: FC<Props> = ({ data, className }) => {
+const MovieView: FC<Props> = ({ data, className, isLoading }) => {
   const navigate = useNavigate();
   return (
     <div
       className={`dark:bg-[#000000] dark:transition-all transition-all ${className}`}
     >
       <div className="container">
-        <div className="grid grid-cols-4 gap-5 max-lg:grid-cols-3 max-md:grid-cols-2 max-sm:grid-cols-1">
+        {isLoading && <Skeleton />}
+        <div className="grid grid-cols-4 gap-5 max-[1000px]:grid-cols-3 max-[850px]:grid-cols-2 max-[520px]:grid-cols-1">
           {data?.map((movie: any) => (
             <div key={movie.id} className="cursor-pointer">
               <div onClick={() => navigate(`/movie/${movie.id}`)}>
@@ -27,7 +30,7 @@ const MovieView: FC<Props> = ({ data, className }) => {
                       : defaultImg
                   }
                   alt={movie.title}
-                  className="h-[400px] w-full"
+                  className="h-[450px] w-full max-sm:w-full"
                 />
               </div>
               <div className="pt-[12px]">

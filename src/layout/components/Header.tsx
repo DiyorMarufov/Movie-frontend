@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../shared/assets/header/logo.svg";
 import {
@@ -12,10 +12,25 @@ import {
 } from "lucide-react";
 
 const Header = () => {
-  const [darkMode, setDarkMode] = useState(true);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "true") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    }
+  }, []);
+
   const handleMode = () => {
-    document.documentElement.classList.toggle("dark");
-    setDarkMode(!darkMode);
+    const newMode = !darkMode;
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    setDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
   };
   return (
     <header className="dark:bg-[#000000] dark:transition-all transition-all">
@@ -114,7 +129,7 @@ const Header = () => {
           </div>
 
           <div className="cursor-pointer select-none" onClick={handleMode}>
-            {darkMode ? (
+            {!darkMode ? (
               <Moon className="text-[#111111] hover:opacity-80" />
             ) : (
               <Sun className="text-[var(--color-py)] hover:opacity-80" />

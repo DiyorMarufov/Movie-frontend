@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { memo, type FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   text: string;
@@ -7,8 +8,10 @@ interface Props {
 }
 
 const ShowAll: FC<Props> = ({ text, className }) => {
+  const navigate = useNavigate();
   return (
     <button
+      onClick={() => navigate("/movie")}
       className={`flex items-center gap-1 cursor-pointer hover:opacity-80 ${className}`}
     >
       <span>{text}</span>
