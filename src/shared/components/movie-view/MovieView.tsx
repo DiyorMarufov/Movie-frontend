@@ -14,7 +14,6 @@ const MovieView: FC<Props> = ({ data, className, isLoading }) => {
   const navigate = useNavigate();
 
   const [activeId, setActiveId] = useState<number | null>(null);
-
   return (
     <div
       className={`dark:bg-[#000000] dark:transition-all transition-all ${className}`}
@@ -39,7 +38,7 @@ const MovieView: FC<Props> = ({ data, className, isLoading }) => {
                   }
                   alt={movie.title}
                   className={`h-[450px] w-full transition-transform duration-300 ease-in-out relative ${
-                    activeId === movie.id ? "scale-110 z-20" : "hover:scale-105"
+                    activeId === movie.id ? "scale-105 z-20" : "hover:scale-105"
                   }`}
                 />
               </div>

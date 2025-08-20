@@ -12,7 +12,7 @@ export const useMovie = () => {
 
   const getChosenMovies = (path: string) =>
     useQuery({
-      queryKey: [movieKey],
+      queryKey: [movieKey,path],
       queryFn: () => api.get(`movie/${path}`).then((res) => res.data),
     });
 
@@ -22,5 +22,11 @@ export const useMovie = () => {
       queryFn: () => api.get(`movie/${id}`).then((res) => res.data),
     });
 
-  return { getMovies, getChosenMovies, getMovieById };
+  const getMovieItems = (id: string, path: string) =>
+    useQuery({
+      queryKey: [movieKey, id, path],
+      queryFn: () => api.get(`movie/${id}/${path}`).then((res) => res.data),
+    });
+
+  return { getMovies, getChosenMovies, getMovieById, getMovieItems };
 };

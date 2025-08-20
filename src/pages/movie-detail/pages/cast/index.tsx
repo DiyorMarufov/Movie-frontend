@@ -1,14 +1,15 @@
 import { memo } from "react";
-import { useParams } from "react-router-dom";
-import { useMovieDetail } from "../../services/useMovieDetail";
+import { useNavigate, useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../../../shared/const";
 import userLogo from "../../../../shared/assets/hero/user-icon.png";
 import SkeletonCastCrew from "../../../../shared/components/ui/SkeletonCastCrew";
+import { useMovie } from "../../../movie/services/useMovie";
 
 const Cast = () => {
   const { id } = useParams();
-  const { getMovieItems } = useMovieDetail();
+  const { getMovieItems } = useMovie();
   const { data: creditsData, isLoading } = getMovieItems(id || "", "credits");
+  const navigate = useNavigate()
 
   return (
     <>
@@ -17,7 +18,11 @@ const Cast = () => {
       ) : (
         <div className="flex gap-[20px] overflow-auto mt-[20px] actors">
           {creditsData?.cast?.map((user: any) => (
-            <div key={user.id} className="flex-shrink-0 w-[100px] text-center">
+            <div
+              key={user.id}
+              className="flex-shrink-0 w-[100px] text-center cursor-pointer"
+              onClick={() => navigate(`/actor/${user.id}`)}
+            >
               <div>
                 <img
                   src={

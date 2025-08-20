@@ -25,7 +25,7 @@
   display: none;
 }
 
-.hero::-webkit-scrollbar {
+.hero::-webkit-scrollbar,.actor-images::-webkit-scrollbar {
   display: none;
 }
 

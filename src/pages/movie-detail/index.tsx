@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { NavLink, Outlet, useParams } from "react-router-dom";
-import { useMovieDetail } from "./services/useMovieDetail";
 import { IMAGE_URL } from "../../shared/const";
 import Title from "../../shared/components/ui/title";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
@@ -10,10 +9,11 @@ import { Image } from "antd";
 import { Calendar, Plus, Star, Timer } from "lucide-react";
 import SkeletonMovieDetail from "../../shared/components/ui/SkeletonMovieDetail";
 import SkeletonImages from "../../shared/components/ui/SkeletonImages";
+import { useMovie } from "../movie/services/useMovie";
 
 const MovieDetail = () => {
   const { id } = useParams();
-  const { getMovieById, getMovieItems } = useMovieDetail();
+  const { getMovieById, getMovieItems } = useMovie();
   const { data, isLoading } = getMovieById(id || "");
   const { data: imagesData, isLoading: isLoadingImages } = getMovieItems(
     id || "",

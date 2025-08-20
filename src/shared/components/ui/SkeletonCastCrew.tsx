@@ -3,7 +3,7 @@ import React from "react";
 const SkeletonActors = () => {
   return (
     <div className="flex gap-[20px] overflow-auto mt-[20px] actors animate-pulse">
-      {[...Array(8)].map((_, index) => (
+      {[...Array(10)].map((_, index) => (
         <div key={index} className="flex-shrink-0 w-[100px] text-center">
           <div>
             <div className="h-[150px] w-[100px] bg-gray-300 rounded-full mx-auto dark:bg-gray-700" />
