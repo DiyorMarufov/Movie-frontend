@@ -33,7 +33,7 @@ const Header = () => {
     localStorage.setItem("darkMode", newMode.toString());
   };
   return (
-    <header className="dark:bg-[#000000] dark:transition-all transition-all">
+    <header className="sticky top-0 z-50 bg-[#ffffff] dark:bg-[#000000] dark:transition-all transition-all">
       <nav className="container h-20 flex items-center gap-[130px]">
         <div className="flex justify-between items-center w-[65%] dark:text-[#A1A1A1] dark:transition-all transition-all">
           <div>

@@ -1,17 +1,22 @@
-import { memo } from "react";
+import { memo, type FC } from "react";
 import Title from "../ui/title";
 import ShowAll from "../ui/showAll";
 
-const TopWeeks = () => {
+interface Props {
+  text: string;
+  showAll: string;
+}
+
+const TopWeeks: FC<Props> = ({ text, showAll }) => {
   return (
     <div className="container mt-[50px] mb-[20px]">
       <div className="flex justify-between">
         <Title
-          text="На неделе"
+          text={text}
           className="dark:text-[var(--color-py)] dark:transition-all transition-all"
         />
         <ShowAll
-          text="Показать все"
+          text={showAll}
           className="dark:text-[var(--color-py)] dark:transition-all transition-all"
         />
       </div>

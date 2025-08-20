@@ -14,7 +14,6 @@ import "swiper/css/navigation";
 //@ts-ignore
 import "swiper/css/pagination";
 
-
 import {
   Navigation,
   Pagination,
@@ -26,6 +25,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 
 import "../../index.css";
 import SkeletonHero from "../../shared/components/ui/SkeletonHero";
+import { useNavigate } from "react-router-dom";
 
 export interface IPosterMovie {
   id: number | string;
@@ -38,7 +38,8 @@ export interface IPosterMovie {
 }
 
 const Home = () => {
-  const { data,isLoading } = useFullMovieData();
+  const { data, isLoading } = useFullMovieData();
+  const navigate = useNavigate();
   return (
     <section className="dark:bg-[#000000] dark:transition-all transition-all">
       <div className="container-hero relative hero">
@@ -50,7 +51,7 @@ const Home = () => {
           modules={[Navigation, Pagination, Mousewheel, Keyboard, Autoplay]}
           className="mySwiper cursor-pointer rounded-[12px]"
         >
-          {isLoading && <SkeletonHero/>}
+          {isLoading && <SkeletonHero />}
           {data?.map((item: IPosterMovie) => (
             <SwiperSlide key={item.id}>
               <div className="relative">
@@ -58,6 +59,7 @@ const Home = () => {
                   src={IMAGE_URL + item.backdrop_path}
                   className="w-full h-[640px] object-cover"
                   alt={item.title}
+                  onClick={() => navigate(`movie/${item.id}`)}
                 />
                 <div className="absolute bottom-[24px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-[10px] w-[380px] max-[850px]:hidden">
                   <h1 className="font-medium text-[32px] text-[#FFFFFF] text-center">
@@ -79,7 +81,10 @@ const Home = () => {
                     <div className="h-[4px] w-[4px] bg-[white] rounded-full"></div>
                     <span>{item.adult ? "18+" : "16+"}</span>
                   </div>
-                  <button className="flex items-center justify-center gap-[7px] w-full h-[50px] bg-[#ffffff] rounded-[12px] text-[var(--color-py)]">
+                  <button
+                    className="flex items-center justify-center gap-[7px] w-full h-[50px] cursor-pointer hover:opacity-85 bg-[#ffffff] rounded-[12px] text-[var(--color-py)]"
+                    onClick={() => navigate(`movie/${item.id}`)}
+                  >
                     <Play />
                     <span>Watch</span>
                   </button>
@@ -90,7 +95,7 @@ const Home = () => {
         </Swiper>
       </div>
 
-      <TopWeeks />
+      <TopWeeks text="This weekend" showAll="Show all" />
       <MovieView data={data} isLoading={isLoading} />
     </section>
   );

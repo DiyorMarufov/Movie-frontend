@@ -1,3 +1,5 @@
+import React from "react";
+
 const SkeletonHero = () => {
   return (
     <>
@@ -13,4 +15,4 @@ const SkeletonHero = () => {
   );
 };
 
-export default SkeletonHero;
+export default React.memo(SkeletonHero);

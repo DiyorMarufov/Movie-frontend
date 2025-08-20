@@ -1,4 +1,4 @@
-import { memo, type FC } from "react";
+import { memo, useState, type FC } from "react";
 import { IMAGE_URL } from "../../const";
 import { useNavigate } from "react-router-dom";
 import defaultImg from "../../../shared/assets/hero/default-img.jpg";
@@ -12,6 +12,9 @@ interface Props {
 
 const MovieView: FC<Props> = ({ data, className, isLoading }) => {
   const navigate = useNavigate();
+
+  const [activeId, setActiveId] = useState<number | null>(null);
+
   return (
     <div
       className={`dark:bg-[#000000] dark:transition-all transition-all ${className}`}
@@ -21,7 +24,12 @@ const MovieView: FC<Props> = ({ data, className, isLoading }) => {
         <div className="grid grid-cols-4 gap-5 max-[1000px]:grid-cols-3 max-[850px]:grid-cols-2 max-[520px]:grid-cols-1">
           {data?.map((movie: any) => (
             <div key={movie.id} className="cursor-pointer">
-              <div onClick={() => navigate(`/movie/${movie.id}`)}>
+              <div
+                onClick={() => {
+                  navigate(`/movie/${movie.id}`);
+                  setActiveId(movie.id);
+                }}
+              >
                 <img
                   loading="lazy"
                   src={
@@ -30,7 +38,9 @@ const MovieView: FC<Props> = ({ data, className, isLoading }) => {
                       : defaultImg
                   }
                   alt={movie.title}
-                  className="h-[450px] w-full"
+                  className={`h-[450px] w-full transition-transform duration-300 ease-in-out relative ${
+                    activeId === movie.id ? "scale-110 z-20" : "hover:scale-105"
+                  }`}
                 />
               </div>
               <div className="pt-[12px]">
