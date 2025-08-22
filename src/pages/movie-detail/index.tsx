@@ -1,111 +1,133 @@
-import { memo } from "react";
-import { useParams } from "react-router-dom";
-import { useMovieDetail } from "./services/useMovieDetail";
+import { memo, useEffect } from "react";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { IMAGE_URL } from "../../shared/const";
-import { Star } from "lucide-react";
 import Title from "../../shared/components/ui/title";
-import userLogo from "../../shared/assets/hero/user-icon.png";
 import TopWeeks from "../../shared/components/top-weeks/TopWeeks";
 import MovieView from "../../shared/components/movie-view/MovieView";
-import { useFullMovieData } from "../../shared/hooks";
+import { useFullMovieData } from "../../shared/hooks/getGenres";
+import { Image } from "antd";
+import { Calendar, Plus, Star, Timer } from "lucide-react";
+import SkeletonMovieDetail from "../../shared/components/ui/SkeletonMovieDetail";
+import SkeletonImages from "../../shared/components/ui/SkeletonImages";
+import { useMovie } from "../movie/services/useMovie";
 
 const MovieDetail = () => {
   const { id } = useParams();
-  const { getMovieById, getMovieItems } = useMovieDetail();
+  const { getMovieById, getMovieItems } = useMovie();
   const { data, isLoading } = getMovieById(id || "");
-  const { data: imagesData } = getMovieItems(id || "", "images");
-  const { data: creditsData } = getMovieItems(id || "", "credits");
+  const { data: imagesData, isLoading: isLoadingImages } = getMovieItems(
+    id || "",
+    "images"
+  );
   const { data: movieViews } = useFullMovieData();
 
-  if (isLoading) {
-    return (
-      <div className="container">
-        <div className="w-full h-[650px] bg-gray-300 animate-pulse"></div>
-        <div className="my-3 w-[30%] h-10 bg-gray-300 animate-pulse"></div>
-        <div className="my-3 w-[10%] h-10 bg-gray-300 animate-pulse"></div>
-      </div>
-    );
-  }
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   return (
-    <section className="pt-[10px] dark:bg-[#000000] dark:transition-all transition-all">
+    <section className="pt-[20px]">
       <div className="container flex flex-col">
-        <div className="flex gap-[30px] max-[1200px]:flex-col">
-          <div className="w-[50%] max-[1200px]:w-full">
-            <div>
-              <img src={`${IMAGE_URL}${data?.backdrop_path}`} alt="" />
+        {isLoading ? (
+          <SkeletonMovieDetail />
+        ) : (
+          <div className="flex gap-[30px] max-[1200px]:flex-col">
+            <div className="max-[1200px]:flex justify-center">
+              <div>
+                <img
+                  src={`${IMAGE_URL}${data?.poster_path}`}
+                  className="h-[575px]"
+                  alt=""
+                />
+              </div>
             </div>
-          </div>
-          <div className="w-[50%] bg-white rounded-lg shadow-lg px-6 pt-2 max-[1200px]:w-full max-[1200px]:pb-3 dark:bg-[#111111] dark:transition-all transition-all">
-            <h2 className="text-2xl font-semibold mb-4 text-center border-b pb-2 dark:text-[#A1A1A1] dark:transition-all transition-all">
-              About Movie
-            </h2>
+            <div className="flex-1 max-[1200px]:w-full max-[1200px]:pb-3">
+              <div className="flex flex-wrap items-center justify-between max-[395px]:gap-2">
+                <h1
+                  title={data?.title}
+                  className="font-semibold text-[25px] line-clamp-1 dark:text-[#ffffff] dark:transition-all transition-all"
+                >
+                  {data?.title}
+                </h1>
+                <button className="flex items-center gap-2 p-[16px] rounded-[15px] text-[#ffffff] bg-[var(--color-py)] cursor-pointer hover:opacity-85">
+                  <Plus /> Add to Favourite
+                </button>
+              </div>
 
-            <div className="space-y-3 text-gray-700 dark:text-[#A1A1A1]">
-              <p>
-                <span className="font-semibold">Title:</span> {data?.title}
-              </p>
-              <p>
-                <span className="font-semibold">Release Date:</span>{" "}
-                {data?.release_date}
-              </p>
-              <p>
-                <span className="font-semibold">Rating:</span>
-                <span className="inline-flex ml-2 text-yellow-500">
-                  <Star className="w-5 h-5 fill-current mr-1" />{" "}
-                  {data?.vote_average.toFixed(1)} / 10
-                </span>
-                <span className="ml-2 text-sm text-gray-500 dark:text-[#A1A1A1]">
-                  ({data?.vote_count} votes)
-                </span>
-              </p>
-              <p>
-                <span className="font-semibold">Runtime:</span> {data?.runtime}{" "}
-                minutes
-              </p>
-              <p>
-                <span className="font-semibold">Genres:</span>{" "}
-                {data?.genres?.map((g: any) => g.name).join(", ")}
-              </p>
-              <p>
-                <span className="font-semibold">Original Language:</span>{" "}
-                {data?.original_language.toUpperCase()}
-              </p>
-              <div className="flex justify-between max-[500px]:flex-col max-[550px]:gap-2">
-                <p>
-                  <span className="font-semibold">Adult Content:</span>{" "}
-                  {data?.adult ? "Yes" : "No"}
-                </p>
+              <div className="flex flex-wrap items-center gap-2 pt-[60px] dark:text-[#ffffff] dark:transition-all transition-all">
+                <div className="flex flex-wrap gap-2">
+                  {data?.genres?.map((item: any) => (
+                    <div key={item.id}>
+                      <div className="p-[10px] rounded-[10px] bg-[#000000] font-bold text-[#ffffff] dark:bg-[#ffffff] dark:text-[#000000] dark:transition-all transition-all">
+                        {item?.name}
+                      </div>
+                    </div>
+                  ))}
+                </div>
 
-                {data?.homepage && (
-                  <p>
-                    <span className="font-semibold">Homepage:</span>{" "}
-                    <a
-                      href={data.homepage}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      Visit Official Site
-                    </a>
+                <div className="flex items-center gap-[6px] py-[8px] px-[10px] dark:text-[#ffffff] dark:transition-all transition-all">
+                  <Calendar />
+                  <p className="text-[16px] flex items-center pt-1">
+                    {data?.release_date.split("-")[0]}
                   </p>
-                )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <Timer />
+                  <p className="text-[16px] flex items-center pt-1">
+                    <span>{Math.floor(data?.runtime / 60)}</span>:
+                    <span>{data?.runtime % 60}</span>
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 p-[10px]">
+                  <Star className="fill-black" />
+                  <p className="mt-1 text-[16px]">
+                    {data?.vote_average.toFixed(1)}
+                  </p>
+                </div>
+              </div>
+              <div className="pt-[24px] dark:text-[#ffffff] font-bold dark:transition-all transition-all">
+                <p>{data?.overview}</p>
+              </div>
+
+              <div className="grid grid-cols-[130px_10px_1fr] gap-y-2 text-[17px] pt-[44px] font-bold dark:text-[#ffffff] dark:transition-all transition-all">
+                <div className="px-3 text-right">Country</div>
+                <div className="text-center">:</div>
+                <div className="px-3">{data?.origin_country}</div>
+
+                <div className="px-3 text-right">Genre</div>
+                <div className="text-center">:</div>
+                <div className="px-3">
+                  {data?.genres?.map((p: any) => p.name).join(", ")}
+                </div>
+
+                <div className="px-3 text-right">Date Release</div>
+                <div className="text-center">:</div>
+                <div className="px-3">{data?.release_date}</div>
+
+                <div className="px-3 text-right">Production</div>
+                <div className="text-center">:</div>
+                <div className="px-3">
+                  {data?.production_companies
+                    .map((item: any) => item.name)
+                    .join(", ")}
+                </div>
+
+                <div className="px-3 text-right">Revenue</div>
+                <div className="text-center">:</div>
+                <div className="px-3">{data?.revenue.toLocaleString()}$</div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
-        <div className="mt-3">
-          <span className="font-semibold">Overview:</span> {data?.overview}
-        </div>
-
+        {isLoadingImages && <SkeletonImages />}
         <div className="flex gap-[20px] overflow-x-auto mt-10 h-[220px] images">
           {imagesData?.backdrops?.slice(0, 20).map((item: any, inx: number) => (
             <div key={inx} className="flex-shrink-0">
-              <img
+              <Image
                 src={IMAGE_URL + item.file_path}
                 alt=""
-                className="h-full object-cover rounded"
+                className="h-full object-cover rounded-[10px]"
                 width={380}
               />
             </div>
@@ -113,50 +135,27 @@ const MovieDetail = () => {
         </div>
 
         <div className="mt-[30px]">
-          <Title text="Actors" />
+          <div className="flex gap-10">
+            <NavLink to={""}>
+              <Title
+                text="Cast"
+                className={`text-[#000000] cursor-pointer select-none dark:text-[#ffffff] dark:hover:text-[var(--color-py)] dark:transition-all transition-all`}
+              />
+            </NavLink>
 
-          <div className="flex gap-[20px] overflow-auto mt-[20px] actors">
-            {creditsData?.cast?.map((user: any) => (
-              <div
-                key={user.id}
-                className="flex-shrink-0 w-[100px] text-center"
-              >
-                <div>
-                  <img
-                    src={
-                      user.profile_path
-                        ? IMAGE_URL + user.profile_path
-                        : userLogo
-                    }
-                    width={100}
-                    height={150}
-                    className="h-[150px] w-[100px] object-cover rounded-full mx-auto"
-                    alt={user.name}
-                    loading="lazy"
-                  />
-                </div>
-
-                <div className="mt-2">
-                  <h3
-                    title={user.name}
-                    className="line-clamp-1 text-sm font-medium dark:text-[#A1A1A1]"
-                  >
-                    {user.name}
-                  </h3>
-                  <p
-                    title={user.character}
-                    className="line-clamp-1 text-xs text-gray-500"
-                  >
-                    {user.character}
-                  </p>
-                </div>
-              </div>
-            ))}
+            <NavLink to={"crew"}>
+              <Title
+                text="Crew"
+                className="text-[#000000] cursor-pointer select-none dark:text-[#ffffff] dark:hover:text-[var(--color-py)] dark:transition-all transition-all"
+              />
+            </NavLink>
           </div>
+
+          <Outlet />
         </div>
 
-        <TopWeeks />
-        <MovieView data={movieViews} />
+        <TopWeeks text="This weekend" showAll="Show all" />
+        <MovieView data={movieViews} isLoading={isLoading} />
       </div>
     </section>
   );

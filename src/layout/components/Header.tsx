@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../shared/assets/header/logo.svg";
 import {
@@ -13,12 +13,27 @@ import {
 
 const Header = () => {
   const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem("darkMode");
+    if (savedMode === "true") {
+      document.documentElement.classList.add("dark");
+      setDarkMode(true);
+    }
+  }, []);
+
   const handleMode = () => {
-    document.documentElement.classList.toggle("dark");
-    setDarkMode(!darkMode);
+    const newMode = !darkMode;
+    if (newMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    setDarkMode(newMode);
+    localStorage.setItem("darkMode", newMode.toString());
   };
   return (
-    <header className="dark:bg-[#000000] dark:transition-all transition-all">
+    <header className="sticky top-0 z-50 bg-[#ffffff] dark:bg-[#000000] dark:transition-all transition-all">
       <nav className="container h-20 flex items-center gap-[130px]">
         <div className="flex justify-between items-center w-[65%] dark:text-[#A1A1A1] dark:transition-all transition-all">
           <div>
@@ -35,7 +50,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "text-[#C61F1F]"
+                      ? "text-[var(--color-py)]"
                       : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
                   } transition-all flex flex-col justify-center items-center gap-2`
                 }
@@ -50,7 +65,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "text-[#C61F1F]"
+                      ? "text-[var(--color-py)]"
                       : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
                   } transition-all flex flex-col justify-center items-center gap-2`
                 }
@@ -65,7 +80,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "text-[#C61F1F]"
+                      ? "text-[var(--color-py)]"
                       : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
                   } transition-all flex flex-col justify-center items-center gap-2`
                 }
@@ -81,7 +96,7 @@ const Header = () => {
                 className={({ isActive }) =>
                   `${
                     isActive
-                      ? "text-[#C61F1F]"
+                      ? "text-[var(--color-py)]"
                       : "dark:text-[#A1A1A1] dark:transition-all text-[black]"
                   } transition-all flex flex-col justify-center items-center gap-2`
                 }
@@ -95,7 +110,7 @@ const Header = () => {
 
         <div className="flex items-center gap-3 max-[1100px]:hidden">
           <div className="relative inline-block px-4 py-2">
-            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none dark:text-[#C61F1F] dark:transition-all transition-all">
+            <select className="appearance-none bg-transparent pr-6 pl-2 py-1 text-sm font-medium text-gray-800 focus:outline-none dark:text-[var(--color-py)] dark:transition-all transition-all">
               <option value="eng" selected>
                 eng
               </option>
@@ -108,16 +123,16 @@ const Header = () => {
           </div>
 
           <div>
-            <button className="py-[14px] px-[66px] rounded-[12px] bg-[#C61F1F] text-[white] cursor-pointer hover:opacity-85">
+            <button className="py-[14px] px-[66px] rounded-[12px] bg-[var(--color-py)] text-[white] cursor-pointer hover:opacity-85">
               Login
             </button>
           </div>
 
           <div className="cursor-pointer select-none" onClick={handleMode}>
-            {darkMode ? (
-              <Moon className="text-[#C61F1F] hover:opacity-80" />
+            {!darkMode ? (
+              <Moon className="text-[#111111] hover:opacity-80" />
             ) : (
-              <Sun className="text-[#111111] hover:opacity-80" />
+              <Sun className="text-[var(--color-py)] hover:opacity-80" />
             )}
           </div>
         </div>

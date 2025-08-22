@@ -1,7 +1,5 @@
 import { memo } from "react";
 import footerLogo from "../../shared/assets/footer/footer-logo.svg";
-import playMarket from "../../shared/assets/footer/play-market.svg";
-import apple from "../../shared/assets/footer/apple.svg";
 import { Link } from "react-router-dom";
 import {
   Clapperboard,
@@ -16,12 +14,13 @@ import {
   Sparkle,
   Youtube,
 } from "lucide-react";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
 
 const Footer = () => {
   return (
     <footer className="pt-[118px] dark:bg-[#000000] dark:transition-all transition-all">
       <div className="container">
-        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1 dark:bg-[#111111] dark:text-[#C61F1F] dark:transition-all transition-all">
+        <div className="grid grid-cols-4 gap-[30px] pt-[30px] pl-[25px] pb-[30px] bg-gray-100 rounded-[12px] max-lg:grid-cols-3 max-lg:gap-y-[50px] max-md:grid-cols-2 max-sm:grid-cols-1 dark:bg-[#111111] dark:text-[var(--color-py)] dark:transition-all transition-all">
           <div className="flex flex-col gap-[48px]">
             <div>
               <img src={footerLogo} alt="" />
@@ -29,7 +28,7 @@ const Footer = () => {
             <div className="flex flex-col gap-2 pl-[10px]">
               <div className="flex items-center gap-2.5">
                 <div>
-                  <img src={playMarket} width={30} alt="" />
+                  <FaGooglePlay className="text-[30px]" />
                 </div>
                 <div className="dark:text-[#ffffff]">
                   <p className="text-[13px] uppercase">Download from</p>
@@ -38,7 +37,7 @@ const Footer = () => {
               </div>
               <div className="flex items-center gap-2.5">
                 <div>
-                  <img src={apple} width={30} alt="" />
+                  <FaApple className="text-[35px]" />
                 </div>
                 <div className="dark:text-[#ffffff]">
                   <p className="text-[13px] uppercase">Get it on</p>

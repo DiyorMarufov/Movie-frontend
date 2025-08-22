@@ -2,9 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@theme {
-  --color-laylo: red;
-  --color-bg-py: blue;
+:root {
+  --color-py: #c61f1f;
 }
 
 .container,
@@ -22,6 +21,31 @@
 }
 
 .images::-webkit-scrollbar,
-.actors::-webkit-scrollbar {
+.hero::-webkit-scrollbar,
+.actors::-webkit-scrollbar,
+.actor-images::-webkit-scrollbar,
+.cast::-webkit-scrollbar {
   display: none;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #444;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
